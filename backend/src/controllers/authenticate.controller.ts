@@ -37,7 +37,6 @@ export const registerUser: RequestHandler = async (req, res, next) => {
     // req.session.userId = newUser._id
     res.status(201).json(newUser);
   } catch (error) {
-    console.log("error in register", error);
     next(error);
   }
 };
@@ -60,7 +59,6 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 
     res.status(200).json(findUser);
   } catch (error) {
-    console.log("error in login", error);
     next(error);
   }
 };

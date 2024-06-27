@@ -15,6 +15,10 @@ app.use((req, res, next) => {
   next(createHttpError(404, "endpoint not found!"));
 });
 
+app.use((req, res, next) => {
+  next(createHttpError("404", "Endpoint not found!"));
+});
+
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
   console.error(error);
   let errorMessage = "An unknown has occured";
