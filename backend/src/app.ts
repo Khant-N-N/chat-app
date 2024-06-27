@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
-import authRouter from "./routes/authenticate.route";
 import createHttpError, { isHttpError } from "http-errors";
+import authRouter from "./routes/authenticate.route";
+import userRouter from "./routes/user.route";
 
 const app = express();
 app.use(express.json());
@@ -10,6 +11,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", authRouter);
+app.use("/api", userRouter);
 
 app.use((req, res, next) => {
   next(createHttpError(404, "endpoint not found!"));
