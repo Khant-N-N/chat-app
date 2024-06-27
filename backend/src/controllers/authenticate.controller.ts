@@ -64,3 +64,5 @@ export const loginUser: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const logOut: RequestHandler = async (req, res, next) => {};
