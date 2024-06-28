@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import app from "./app";
 import "dotenv/config";
 import env from "./utils/envalid";
+import app from "./app";
 
 mongoose
   .connect(env.MONGO)
