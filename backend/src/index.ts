@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
 import app from "./app";
 import "dotenv/config";
+import env from "./utils/envalid";
 
 mongoose
-  .connect(process.env.MONGO!)
+  .connect(env.MONGO)
   .then(() => {
-    app.listen(process.env.PORT, () =>
-      console.log("server start on port ", process.env.PORT)
-    );
+    app.listen(env.PORT, () => console.log("server start on port ", env.PORT));
     console.log("mongoDb connected");
   })
   .catch(console.error);
