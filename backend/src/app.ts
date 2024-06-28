@@ -2,6 +2,9 @@ import express, { NextFunction, Request, Response } from "express";
 import createHttpError, { isHttpError } from "http-errors";
 import authRouter from "./routes/authenticate.route";
 import userRouter from "./routes/user.route";
+import env from "./utils/envalid";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
 const app = express();
 app.use(express.json());
@@ -9,6 +12,20 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("hello!");
 });
+
+app.use(
+  session({
+    name: "chat-app-cookie",
+    secret: env.SESSION_SECRET,
+    rolling: true,
+    saveUninitialized: false,
+    resave: false,
+    store: MongoStore.create({
+      mongoUrl: env.MONGO,
+    }),
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  })
+);
 
 app.use("/api", authRouter);
 app.use("/api", userRouter);
