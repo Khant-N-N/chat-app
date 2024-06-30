@@ -34,7 +34,7 @@ export const registerUser: RequestHandler = async (req, res, next) => {
       password: hashedPassword,
     });
 
-    // req.session.userId = newUser._id
+    req.session.userId = newUser._id;
     res.status(201).json(newUser);
   } catch (error) {
     next(error);
@@ -57,10 +57,16 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 
     if (!passwordMatch) throw createHttpError(401, "invalid credentials");
 
+    req.session.userId = findUser._id;
+
     res.status(200).json(findUser);
   } catch (error) {
     next(error);
   }
 };
 
-export const logOut: RequestHandler = async (req, res, next) => {};
+export const logOut: RequestHandler = async (req, res, next) => {
+  req.session.destroy((err) =>
+    err ? console.error(err) : res.sendStatus(200)
+  );
+};
