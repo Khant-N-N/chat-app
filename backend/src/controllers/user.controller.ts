@@ -3,7 +3,14 @@ import createHttpError from "http-errors";
 import mongoose from "mongoose";
 import userModel from "../models/user.model";
 
-export const authUser: RequestHandler = async (req, res, next) => {};
+export const getAuthUser: RequestHandler = async (req, res, next) => {
+  try {
+    const authUser = await userModel.findById(req.session.userId).exec();
+    if (!authUser) throw createHttpError(404, "user not found.");
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const getUserData: RequestHandler = async (req, res, next) => {
   const userId = req.params.id;
