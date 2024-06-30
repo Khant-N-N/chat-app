@@ -15,7 +15,7 @@ export const getAuthUser: RequestHandler = async (req, res, next) => {
 export const getUserData: RequestHandler = async (req, res, next) => {
   const userId = req.params.id;
   try {
-    if (!userId) throw createHttpError(401, "parameters are missing");
+    if (!userId) throw createHttpError(400, "parameters are missing");
     if (!mongoose.isValidObjectId(userId))
       throw createHttpError(400, "Invalid user ID");
 
@@ -31,7 +31,7 @@ export const getUserData: RequestHandler = async (req, res, next) => {
 export const findUser: RequestHandler = async (req, res, next) => {
   const keyword = req.query.keyword as string;
   try {
-    if (!keyword) throw createHttpError(401, "Add atleast 1 keyword to find.");
+    if (!keyword) throw createHttpError(400, "Add atleast 1 keyword to find.");
     const user = await userModel.find({
       username: { $regex: keyword, $options: "i" },
     });
