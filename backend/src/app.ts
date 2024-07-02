@@ -1,10 +1,12 @@
 import express, { NextFunction, Request, Response } from "express";
 import createHttpError, { isHttpError } from "http-errors";
 import authRouter from "./routes/authenticate.route";
+import chatRouter from "./routes/chat.route";
 import userRouter from "./routes/user.route";
 import env from "./utils/envalid";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import { authUser } from "./utils/authUser";
 
 const app = express();
 app.use(express.json());
@@ -28,7 +30,8 @@ app.use(
 );
 
 app.use("/api", authRouter);
-app.use("/api", userRouter);
+app.use("/api", authUser, userRouter);
+app.use("/api", authUser, chatRouter);
 
 app.use((req, res, next) => {
   next(createHttpError(404, "endpoint not found!"));
