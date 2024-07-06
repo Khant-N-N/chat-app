@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
+import Home from "./pages/Home";
+import { Navigate, Route, Routes } from "react-router-dom";
+
+const LogIn = lazy(() => import("./pages/LogIn"));
+const Register = lazy(() => import("./pages/Register"));
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h2 className="text-[#fa2134]">Hello</h2>
-    </>
+    <Suspense fallback={<>Loading...</>}>
+      <Routes>
+        <Route path="*" element={<Navigate to={"/"} />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/log-in" element={<LogIn />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Suspense>
   );
 }
 
