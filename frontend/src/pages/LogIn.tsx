@@ -26,7 +26,8 @@ const LogIn = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const url = baseUrl + "log-in";
+      setErrorMessage(null);
+      const url = baseUrl + "/log-in";
       let body;
       if (emailLogIn) {
         body = {
