@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const baseUrl = "http://localhost:8000/api";
+export const baseUrl =
+  import.meta.env.VITE_API_LINK || "http://localhost:8000/api";
 
 interface ReqParam {
   url: string;
