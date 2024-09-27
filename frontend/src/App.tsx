@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from "react";
-import Home from "./pages/Home";
+import HomeDashboard from "./pages/HomeDashboard";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 const LogIn = lazy(() => import("./pages/LogIn"));
@@ -10,7 +10,7 @@ function App() {
     <Suspense fallback={<>Loading...</>}>
       <Routes>
         <Route path="*" element={<Navigate to={"/"} />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomeDashboard />} />
         <Route path="/log-in" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
       </Routes>
