@@ -16,12 +16,9 @@ const userSlice = createSlice({
     setAuthenticatedUser: (state, action: PayloadAction<UserModel | null>) => {
       state.logInUser = action.payload;
     },
-    logOut_Delete: (state) => {
-      state.logInUser = null;
-    },
   },
 });
 
-export const { setAuthenticatedUser, logOut_Delete } = userSlice.actions;
+export const { setAuthenticatedUser } = userSlice.actions;
 export default userSlice.reducer;
 export type UserSlice = ReturnType<typeof userSlice.reducer>;
