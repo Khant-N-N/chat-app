@@ -1,6 +1,7 @@
-import { useState } from "react";
 import { baseUrl, getReq } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAuthenticatedUser } from "../features/userSlice";
 
 interface Floating {
   text: "Log out" | "Delete";
@@ -13,6 +14,7 @@ const FloatingConfirm = ({
   isDisplayFloat,
   setIsDisplayFloat,
 }: Floating) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClick = async () => {
@@ -21,6 +23,7 @@ const FloatingConfirm = ({
         await getReq(`${baseUrl}/log-out`);
         setIsDisplayFloat(false);
         navigate("/log-in");
+        dispatch(setAuthenticatedUser(null));
       }
     } catch (error) {
       console.error(error);
