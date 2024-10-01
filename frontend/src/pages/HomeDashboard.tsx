@@ -8,6 +8,8 @@ import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/navBar";
 import FloatingConfirm from "../components/FloatingConfirm";
+import MainLeft from "../components/MainLeft";
+import MainRight from "../components/MainRight";
 
 const HomeDashboard = () => {
   const [isDisplayFloat, setIsDisplayFloat] = useState(false);
@@ -33,7 +35,7 @@ const HomeDashboard = () => {
   }, [dispatch, navigate]);
 
   return (
-    <main className="bg-primary w-full h-screen pt-20">
+    <>
       <NavBar
         setIsDisplayFloat={setIsDisplayFloat}
         setFloaterText={setFloaterText}
@@ -43,8 +45,11 @@ const HomeDashboard = () => {
         isDisplayFloat={isDisplayFloat}
         setIsDisplayFloat={setIsDisplayFloat}
       />
-      <div className="text-red-500">home</div>
-    </main>
+      <main className="bg-primary w-full h-screen pt-20 flex px-10 text-white">
+        <MainLeft />
+        <MainRight />
+      </main>
+    </>
   );
 };
 

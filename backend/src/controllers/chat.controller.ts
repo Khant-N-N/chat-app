@@ -30,7 +30,7 @@ export const createChat: RequestHandler = async (req, res, next) => {
     });
 
     let chat = await chatModel.findOne({ members: { $all: userIds } }).exec();
-    if (!chat) {
+    if (chat?.members.length !== userIds.length || !chat) {
       chat = await chatModel.create({ members: userIds });
     }
 
