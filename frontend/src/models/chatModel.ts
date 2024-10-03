@@ -1,5 +1,5 @@
 export interface ChatModel {
-  id: string;
+  _id: string;
   chatname: string;
   createdAt: string;
   updatedAt: string;
